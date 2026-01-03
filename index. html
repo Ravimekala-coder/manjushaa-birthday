@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +7,20 @@
 <title>Happy Birthday Manjushaa 🎂</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #6a0dad, #b266ff);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  color: white;
-  overflow: hidden;
+  color: #fff;
 }
 
 .container {
@@ -24,18 +28,19 @@ body {
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
 }
 
 .surprise {
   font-size: 90px;
   cursor: pointer;
+  margin-top: 20px;
   animation: bounce 1.5s infinite;
 }
 
 @keyframes bounce {
   0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
+  50% { transform: translateY(-15px); }
 }
 
 .hidden {
@@ -46,33 +51,24 @@ img {
   width: 220px;
   border-radius: 20px;
   margin-top: 15px;
-  box-shadow: 0 0 25px rgba(255,255,255,0.6);
+  box-shadow: 0 0 20px rgba(255,255,255,0.6);
 }
 
 .balloons span {
-  position: absolute;
-  bottom: -100px;
-  font-size: 40px;
+  position: fixed;
+  bottom: -60px;
+  font-size: 36px;
   animation: float 6s linear infinite;
 }
 
 @keyframes float {
   from { transform: translateY(0); }
-  to { transform: translateY(-120vh); }
-}
-
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
+  to { transform: translateY(-110vh); }
 }
 </style>
 </head>
 
 <body>
-
-<canvas id="confetti"></canvas>
 
 <div class="container" id="welcome">
   <h1>Hey Manju 💜 Welcome</h1>
@@ -81,10 +77,8 @@ canvas {
 
 <div class="container hidden" id="birthday">
   <h1>Happy Birthday Manjushaa 🎂<br>Cutiepie 💖</h1>
-
   <img src="manju.jpg" alt="Manjushaa">
-
-  <p style="font-size:18px;margin-top:12px;">
+  <p style="margin-top:12px;font-size:16px;">
     Enjoy your day with birthday vibes and happiness ✨
   </p>
 </div>
@@ -104,42 +98,9 @@ function showSurprise() {
   document.getElementById("welcome").classList.add("hidden");
   document.getElementById("birthday").classList.remove("hidden");
   document.getElementById("balloons").classList.remove("hidden");
-  document.getElementById("song").play();
-  startConfetti();
-}
 
-/* CONFETTI */
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let confetti = [];
-
-function startConfetti() {
-  for (let i = 0; i < 200; i++) {
-    confetti.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 6 + 2,
-      d: Math.random() * 6 + 2,
-      color: `hsl(${Math.random()*360},100%,50%)`
-    });
-  }
-  animateConfetti();
-}
-
-function animateConfetti() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  confetti.forEach(c => {
-    ctx.beginPath();
-    ctx.fillStyle = c.color;
-    ctx.arc(c.x, c.y, c.r, 0, Math.PI*2);
-    ctx.fill();
-    c.y += c.d;
-    if (c.y > canvas.height) c.y = 0;
-  });
-  requestAnimationFrame(animateConfetti);
+  const audio = document.getElementById("song");
+  audio.play().catch(()=>{});
 }
 </script>
 
